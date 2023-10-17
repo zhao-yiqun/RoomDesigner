@@ -1,6 +1,6 @@
 ### RoomDesigner: Encoding Anchor-latents for Style-consistent and Shape-compatible Indoor Scene Generation
 
-**3DV 2024**
+**3DV 2024** , [**arxiv preprint** ](https://arxiv.org/abs/2310.10027)
 
 [Yiqun Zhao](https://github.com/zhao-yiqun), [Zibo Zhao](https://github.com/Maikouuu), [Jing Li](https://lijing1996.github.io/), [Sixun Dong](https://github.com/Ironieser) and [Shenghua Gao](https://scholar.google.com/citations?user=fe-1v0MAAAAJ)
 
