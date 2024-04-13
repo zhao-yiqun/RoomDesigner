@@ -1,0 +1,35 @@
+4.9 17:00
+ai_gpu04:  vaekl the smooth_loss weight is 60, the tet resolution is 90, bs is 4
+sist-a40-07:  vqvae the smooth_loss weight is 60, the tet resolution is 90, bs is 6
+lijing1@sist-a40-08: vqvae_512_1024_2048_dmtet_90, the resolution is 90, smooth_loss weight is 60, bs is 6
+
+4.10 10:00
+ai_gpu03: vqvae_512_1024_2048_dmtet_90, the resolution is 90, smooth_loss weight is 60, bs is 6
+sist-a40-07:  vqvae the smooth_loss weight is 20, the tet resolution is 90, bs is 6
+lijing1@sist-a40-08:  vaekl the smooth_loss weight is 60, the tet resolution is 90, bs is 4
+
+# fov has been revisted!!!!
+
+4.10 15:46
+sist-a40-07:vqvae: output/vqvae_512_1024_2048_dmtet_90_fov39 vqvae_512_1024_2048_dmtet bs 6 smooth_loss 1 loss_sigma 0.01
+
+lijing1@sist-a40-08:  vaekl the smooth_loss weight is 0.01, loss_sigma 0.0001, the tet resolution is 90, bs is 4
+ai_gpu03: vaekl, the resolution is 90, smooth_loss weight is 0.0, bs is 6, loss_sigma 0.01, vaekl_512_32_2048_dmtet_90,vaekl_512_32_2048_dmtet
+
+
+qianych: rgb_loss * 2
+
+4.10 17:22
+lijing1@sist-a40-08:  vaekl the smooth_loss weight is 0.00, loss_sigma 0.0001, the tet resolution is 90, bs is 4
+
+
+
+/public/home/qianych/anaconda3/envs/bacon/lib/python3.8/site-packages/torch/autograd/__init__.py:173: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according
+to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [32, 64, 1, 1], strides() = [64, 1, 64, 64]
+bucket_view.sizes() = [32, 64, 1, 1], strides() = [64, 1, 1, 1] (Triggered internally at  ../torch/csrc/distributed/c10d/reducer.cpp:312.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+export CUDA_HOME=/public/software/CUDA/cuda-11.3
+export PATH=/public/software/gcc/gcc-10.2.0/bin:$PATH
+export LD_LIBRARY_PATH=:/public/software/mpc/mpc=1.2.1/lib:/public/software/gmp/gmp-6.2.1/lib:/public/software/mpfr/mpfr-4.1.0/lib
