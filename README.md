@@ -43,6 +43,7 @@ This editing was implemented by 1). edit single object with anchor-latents 2). S
 
 ## Note
 Model code is realesed! However, there are still some different configs and dataprocessing code to be released.
+
 Feel free to contact: goatzyq@163.com
 
 ## Acknowlegement
