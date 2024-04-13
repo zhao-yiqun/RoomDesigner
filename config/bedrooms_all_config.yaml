@@ -1,0 +1,66 @@
+data:
+    dataset_type: "cached_threedfront_shape"
+    encoding_type: "cached_autoregressive_wocm_shape"
+#    dataset_directory: "/public/home/qianych/dataused/3D-bedrooms"
+    dataset_directory: "/public/home/zhaoyq/dataused/3D-bedrooms"
+    annotation_file: "../config/bedroom_threed_front_splits.csv"
+    path_to_invalid_scene_ids: "../config/invalid_threed_front_rooms.txt"
+    path_to_invalid_bbox_jids: "../config/black_list.txt"
+    augmentations: ["rotations"]
+    filter_fn: "threed_front_bedroom"
+    train_stats: "dataset_stats.txt"
+    stage: "second"
+    room_layout_size: "64,64"
+
+network:
+    type: "autoregressive_transformer_all"
+#    pretrained_path: "/public/home/qianych/pre_ckpt/checkpoint-1499.pth"
+    pretrained_path: "/public/home/zhaoyq/pre_ckpt/checkpoint-1499.pth"
+    n_layers: 4
+    n_heads: 12
+    query_dimensions: 128
+    value_dimensions: 128
+    feed_forward_dimensions: 3076
+    hidden2output_layer: "autoregressive_mlc_all"
+    hidden_dims: 1536
+    stage: "second"
+    with_extra_fc: false
+    bbox_output: "autoregressive_mlc_all"
+    n_mixtures: 10
+    use_room_mask_as_features: true
+
+pretrain_params:
+    c_dim: 32
+    hidden_dim: 32
+    n_blocks: 3
+    affine_size: 24
+    reso: 128
+    aware: False
+    plane_min: 0
+    coord_pe: False
+
+
+feature_extractor:
+    name: "resnet18"
+    feature_size: 64
+    freeze_bn: true
+    input_channels: 1
+
+training:
+    splits: ["train", "val"]
+    epochs: 1000
+    steps_per_epoch: 500
+    batch_size: 16
+    save_frequency: 5
+    optimizer: Adam
+    lr: 0.0001
+    weight_decay: 0.0
+
+validation:
+    splits: ["test"]
+    frequency: 0
+    batch_size: 1
+
+logger:
+    type: "wandb"
+    project: "autoregressive_transformer"

@@ -2,6 +2,8 @@
 
 **3DV 2024** , [**arxiv preprint** ](https://arxiv.org/abs/2310.10027)
 
+
+
 [Yiqun Zhao](https://github.com/zhao-yiqun), [Zibo Zhao](https://github.com/Maikouuu), [Jing Li](https://lijing1996.github.io/), [Sixun Dong](https://github.com/Ironieser) and [Shenghua Gao](https://scholar.google.com/citations?user=fe-1v0MAAAAJ)
 
 ## Demo Results
@@ -39,7 +41,17 @@ This editing was implemented by 1). edit single object with anchor-latents 2). S
 | ----------------------------------------- | ------------------------------------------ |
 | ![任意描述](./demo/edit/scene2/video_ori.gif) | ![任意描述](./demo/edit/scene2/video_edit.gif) |
 
-More, coming soon.
+## Note
+Model code is realesed! However, there are still some different configs and dataprocessing code to be released.
+
+## Acknowlegement
+The code is mainly reference to:
+
+* [ATISS](https://github.com/nv-tlabs/ATISS)
+* [3DILG](https://github.com/1zb/3DILG)
+
+we thank the authors for their contributions.
+
 
 #### Citation
 
