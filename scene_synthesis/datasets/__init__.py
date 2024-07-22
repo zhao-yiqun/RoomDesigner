@@ -13,11 +13,8 @@ from .common import BaseDataset
 from .threed_front import ThreedFront, CachedThreedFront
 from .threed_front_shape import ThreedFrontShape, CachedThreedFrontShape
 from .threed_from_open import ThreedFrontOpen, CachedThreedFrontOpen
-from .threed_front_sceneformer import ThreedFront_sceneformer, CachedThreedFront_sceneformer
 from .threed_front_dataset import dataset_encoding_factory
 from .threed_front_dataset_shape import dataset_encoding_factory_shape
-from .threed_front_dataset_open import dataset_encoding_factory_open
-from .threed_front_dataset_sceneformer import dataset_encoding_factory_sceneformer
 from .splits_builder import CSVSplitsBuilder
 
 
@@ -59,26 +56,6 @@ def get_raw_dataset(
             config=config,
             scene_ids=split_scene_ids,
             splits=split
-        )
-    elif "sceneformer" in dataset_type:
-        splits_builder = CSVSplitsBuilder(config["annotation_file"])
-        split_scene_ids = splits_builder.get_splits(split)
-
-        dataset = CachedThreedFront_sceneformer(
-            config["dataset_directory"],
-            config=config,
-            scene_ids=split_scene_ids,
-        )
-    elif "cached" in dataset_type:
-        # Make the train/test/validation splits
-        splits_builder = CSVSplitsBuilder(config["annotation_file"])
-        split_scene_ids = splits_builder.get_splits(split)
-        # ipdb.set_trace()
-
-        dataset = CachedThreedFront_sceneformer(
-            config["dataset_directory"],
-            config=config,
-            scene_ids=split_scene_ids
         )
     else:
         dataset = ThreedFront.from_dataset_directory(
