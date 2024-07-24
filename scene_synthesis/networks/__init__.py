@@ -25,20 +25,10 @@ from .autoregressive_transformer_shape import AutoregressiveTransformerShape,\
     train_on_batch as train_on_batch_shape_autoregressive,\
     validate_on_batch as validate_on_batch_shape_autoregressive
 
-from .autoregressive_transformer_open import AutoregressiveTransformerOpen,\
-    train_on_batch as train_on_batch_open_autoregressive,\
-    validate_on_batch as validate_on_batch_open_autoregressive
-
-from .autoregressive_transformer_all import AutoregressiveTransformerAll,\
-    AutoregressiveTransformerPEAll,\
-    train_on_batch_all as train_on_batch_all_autoregressive,\
-    validate_on_batch_all as validate_on_batch_all_autoregressive
 
 from .hidden_to_output import AutoregressiveDMLL, get_bbox_output
 # from .hidden_to_output_shape import AutoregressiveDMLLShape, get_bbox_outputShape
-from .hidden_to_output_open import AutoregressiveDMLLOpen, get_bbox_outputOpen
 from .hidden_to_output_shapes import AutoregressiveDMLLShape, get_bbox_outputShape
-from .hidden_to_output_all import AutoregressiveDMLLAll, get_bbox_outputAll
 from .feature_extractors import get_feature_extractor
 
 
@@ -75,33 +65,6 @@ def hidden2output_layer(config, n_classes):
                 config_n.get("shape_dimensions", 512),
                 #FIXME
                 # config_n.get("stage", "second"),
-                config_n.get("with_extra_fc", False),
-            )
-    elif hidden2output_layer == "autoregressive_mlc_open":
-        return AutoregressiveDMLLOpen(
-            config_n.get("hidden_dims", 768),
-            n_classes,
-            config_n.get("n_mixtures", 4),
-            get_bbox_outputOpen(config_n.get("bbox_output", "autoregressive_mlc_open")),
-            config_n.get("with_extra_fc", False),
-        )
-    elif hidden2output_layer == "autoregressive_mlc_all":
-        if config_n.get("stage", "first") == "first":
-            return AutoregressiveDMLLAll(
-                config_n.get("hidden_dims", 768),
-                n_classes,
-                config_n.get("n_mixtures", 4),
-                get_bbox_output("autoregressive_mlc"),
-                config_n.get("stage", "first"),
-                config_n.get("with_extra_fc", False),
-            )
-        else:
-            return AutoregressiveDMLLAll(
-                config_n.get("hidden_dims", 768),
-                n_classes,
-                config_n.get("n_mixtures", 4),
-                get_bbox_outputAll(config_n.get("bbox_output", "autoregressive_mlc_all")),
-                config_n.get("stage", "first"),
                 config_n.get("with_extra_fc", False),
             )
     else:
@@ -219,35 +182,6 @@ def build_network(
         train_on_batch = train_on_batch_shape_autoregressive
         validate_on_batch = validate_on_batch_shape_autoregressive
         network = AutoregressiveTransformerShape(
-            input_dims,
-            hidden2output_layer(config, n_classes),
-            get_feature_extractor(
-                config["feature_extractor"].get("name", "resnet18"),
-                freeze_bn=config["feature_extractor"].get("freeze_bn", True),
-                input_channels=config["feature_extractor"].get("input_channels", 1),
-                feature_size=config["feature_extractor"].get("feature_size", 256),
-            ),
-            config["network"],
-            stage=config["network"].get("stage", "first")
-        )
-    elif network_type == "autoregressive_transformer_open":
-        train_on_batch = train_on_batch_open_autoregressive
-        validate_on_batch = validate_on_batch_open_autoregressive
-        network = AutoregressiveTransformerOpen(
-            input_dims,
-            hidden2output_layer(config, n_classes),
-            get_feature_extractor(
-                config["feature_extractor"].get("name", "resnet18"),
-                freeze_bn=config["feature_extractor"].get("freeze_bn", True),
-                input_channels=config["feature_extractor"].get("input_channels", 1),
-                feature_size=config["feature_extractor"].get("feature_size", 256),
-            ),
-            config["network"]
-        )
-    elif network_type == "autoregressive_transformer_all":
-        train_on_batch = train_on_batch_all_autoregressive
-        validate_on_batch = validate_on_batch_all_autoregressive
-        network = AutoregressiveTransformerAll(
             input_dims,
             hidden2output_layer(config, n_classes),
             get_feature_extractor(
